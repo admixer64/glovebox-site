@@ -1,0 +1,81 @@
+<title>Glovebox Privacy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+  :root{
+    --ground:#0B0B0D; --panel:#141518; --champagne:#D9B989;
+    --ink:#0B0B0D; --text:#ECECEE; --muted:#9A9AA1; --hairline:rgba(255,255,255,.10);
+    --sans:'Inter',system-ui,sans-serif; --cond:'Oswald',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground);color:var(--text);font-family:var(--sans);line-height:1.7}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  a{color:var(--champagne)}
+  header{border-bottom:1px solid var(--hairline)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--cond);font-weight:700;letter-spacing:.28em;font-size:1.05rem}
+  .mono-badge{font-family:var(--cond);font-weight:700;color:var(--ink);background:var(--champagne);width:30px;height:30px;display:grid;place-items:center;border-radius:6px}
+  .title{padding:56px 0 8px}
+  h1{font-family:var(--cond);text-transform:uppercase;letter-spacing:.02em;font-size:clamp(2rem,5vw,2.8rem);margin:0}
+  .updated{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:10px}
+  main{padding:24px 0 72px}
+  .summary{background:var(--panel);border:1px solid var(--hairline);border-left:3px solid var(--champagne);border-radius:10px;padding:20px 22px;margin:8px 0 36px}
+  .summary strong{color:var(--text)}
+  h2{font-family:var(--cond);text-transform:uppercase;letter-spacing:.03em;font-size:1.25rem;margin:38px 0 10px;color:var(--text)}
+  p,li{color:var(--muted)}
+  li{margin:6px 0}
+  footer{border-top:1px solid var(--hairline);padding:32px 0;color:#6d6d73;font-size:.82rem}
+  footer a{color:var(--muted)}
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="brand">GLOVEBOX</div>
+    <div class="mono-badge">G</div>
+  </div>
+</header>
+
+<div class="title"><div class="wrap">
+  <h1>Privacy Policy</h1>
+  <div class="updated">Last updated · September 8, 2026</div>
+</div></div>
+
+<main class="wrap">
+  <div class="summary">
+    <strong>The short version:</strong> Glovebox does not collect, transmit, or sell your personal information. Your vehicle records stay on your device and sync only through your own private iCloud account. We operate no servers and cannot see your data.
+  </div>
+
+  <h2>Information we collect</h2>
+  <p>None. Glovebox has no accounts, no sign-up, and no analytics or advertising SDKs. The information you enter — vehicles, service, modifications, documents, photos, drives, and comparable sales — is stored locally on your device.</p>
+
+  <h2>iCloud sync</h2>
+  <p>If you are signed into iCloud, Glovebox uses Apple's CloudKit to store your records in your own private iCloud database so they sync across your devices and survive reinstalling the app. This data is held in your Apple account under Apple's terms; the developer of Glovebox has no access to it. You can turn this off in your device's iCloud settings.</p>
+
+  <h2>Camera and photos</h2>
+  <p>With your permission, Glovebox uses the camera to scan documents and lets you attach photos from your library. These images are stored with your records and are handled exactly like the rest of your data — on your device and in your private iCloud. They are not uploaded anywhere else.</p>
+
+  <h2>On-device intelligence</h2>
+  <p>Document reading and field extraction run entirely on your device using Apple's on-device models. The contents of your receipts, titles, and window stickers are not sent to the developer or to any third-party service.</p>
+
+  <h2>Backups you create</h2>
+  <p>Glovebox can export a complete copy of a vehicle's record as a file. When you choose to password-protect it, the file is encrypted on your device before you save it, so it is unreadable to any cloud provider you store it in — and to us. Where you keep that file, and who you share it with, is entirely your choice.</p>
+
+  <h2>Purchases</h2>
+  <p>Glovebox Pro is a one-time in-app purchase processed by Apple. Glovebox receives only the confirmation that the purchase is valid; it never sees your payment details.</p>
+
+  <h2>Data sharing and sale</h2>
+  <p>We do not share, rent, or sell your information to anyone. There is no third party to share it with.</p>
+
+  <h2>Deleting your data</h2>
+  <p>Delete individual records inside the app at any time, or delete the app to remove its on-device data. To remove synced data, delete the app's data from your iCloud storage settings.</p>
+
+  <h2>Children</h2>
+  <p>Glovebox is not directed at children and does not knowingly collect information from anyone.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the "last updated" date above will change with it.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about privacy? Email <a href="mailto:support@glovebox.app">support@glovebox.app</a>.</p>
+</main>
+
+<footer><div class="wrap"><a href="./index.html">← Back to Glovebox</a></div></footer>
