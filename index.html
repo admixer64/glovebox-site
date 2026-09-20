@@ -1,172 +1,304 @@
-<title>Glovebox</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glovebox — the private garage record</title>
+<meta name="description" content="A premium car record that's truly yours. No account, no servers, no data mining — your history stays on your device and your private iCloud. We can't even see it.">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
   :root{
-    --ground:#0B0B0D; --panel:#141518; --panel-2:#1A1B20;
-    --champagne:#D9B989; --champagne-dim:#b89b6d;
-    --ink:#0B0B0D; --text:#ECECEE; --muted:#9A9AA1;
-    --hairline:rgba(255,255,255,.10); --grid:rgba(255,255,255,.045);
+    --ground:#0B0B0D; --panel:#141518; --panel-2:#1A1B20; --panel-3:#202127;
+    --champagne:#D9B989; --champ-dim:#b89b6d;
+    --ink:#0B0B0D; --text:#ECECEE; --muted:#9A9AA1; --faint:#6d6d73;
+    --hairline:rgba(255,255,255,.10); --grid:rgba(255,255,255,.05);
     --sans:'Inter',system-ui,sans-serif;
-    --cond:'Oswald','Inter Narrow',system-ui,sans-serif;
+    --cond:'Oswald',system-ui,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,monospace;
   }
   *{box-sizing:border-box}
-  body{background:var(--ground);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  html{scroll-behavior:smooth}
+  body{background:var(--ground);color:var(--text);font-family:var(--sans);line-height:1.6;margin:0;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
   a{color:var(--champagne);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
   .eyebrow{font-family:var(--mono);text-transform:uppercase;letter-spacing:.22em;font-size:.68rem;color:var(--champagne)}
   h1,h2,h3{font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.01em;text-wrap:balance;margin:0}
+  .lede{color:var(--muted);font-size:1.1rem}
 
-  /* Top bar */
-  header{border-bottom:1px solid var(--hairline)}
-  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-family:var(--cond);font-weight:700;letter-spacing:.28em;font-size:1.05rem}
-  .mono-badge{font-family:var(--cond);font-weight:700;color:var(--ink);background:var(--champagne);width:30px;height:30px;display:grid;place-items:center;border-radius:6px}
+  /* Nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,13,.82);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--hairline)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{font-family:var(--cond);font-weight:700;letter-spacing:.28em;font-size:1rem}
+  .navlinks{display:flex;gap:28px;font-size:.82rem;color:var(--muted)}
+  .navlinks a{color:var(--muted)}
+  .navlinks a:hover{color:var(--text)}
+  .badge{font-family:var(--cond);font-weight:700;color:var(--ink);background:var(--champagne);width:28px;height:28px;display:grid;place-items:center;border-radius:6px}
+  @media(max-width:720px){.navlinks{display:none}}
 
   /* Hero */
-  .hero{position:relative;padding:96px 0 72px;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;
-    background:radial-gradient(120% 80% at 50% -10%, rgba(217,185,137,.14), transparent 60%);
-    pointer-events:none}
+  .hero{position:relative;padding:104px 0 76px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(130% 90% at 50% -20%, rgba(217,185,137,.16), transparent 62%);pointer-events:none}
   .hero .wrap{position:relative}
-  .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);line-height:.98;margin:18px 0 0}
+  .hero h1{font-size:clamp(2.7rem,7.5vw,5rem);line-height:.96;margin:16px 0 0}
   .hero h1 .accent{color:var(--champagne)}
-  .lede{color:var(--muted);font-size:1.12rem;max-width:44ch;margin:22px 0 0}
-  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:34px;background:var(--champagne);color:var(--ink);
-    font-weight:600;padding:14px 22px;border-radius:9px;font-size:.98rem}
-  .cta small{font-weight:500;opacity:.7}
-  .note{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:14px;letter-spacing:.04em}
-  .own{font-family:var(--cond);text-transform:uppercase;letter-spacing:.02em;line-height:1.12;
-    font-size:clamp(1.35rem,3.6vw,2.05rem);color:var(--text);margin:26px 0 0}
+  .own{font-family:var(--cond);text-transform:uppercase;letter-spacing:.02em;line-height:1.1;font-size:clamp(1.5rem,4vw,2.3rem);margin:28px 0 0}
   .own .accent{color:var(--champagne)}
-  .own small{display:block;font-family:var(--sans);text-transform:none;letter-spacing:0;
-    font-weight:400;font-size:.95rem;color:var(--muted);margin-top:10px;max-width:46ch;line-height:1.55}
+  .own small{display:block;font-family:var(--sans);text-transform:none;letter-spacing:0;font-weight:400;font-size:.98rem;color:var(--muted);margin-top:12px;max-width:48ch;line-height:1.55}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:32px;background:var(--champagne);color:var(--ink);font-weight:600;padding:14px 24px;border-radius:10px;font-size:1rem}
+  .cta small{font-weight:500;opacity:.7}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--hairline);border-radius:999px;padding:7px 13px}
+  .chip b{color:var(--champagne);font-weight:600}
 
-  /* Sections */
-  section{padding:64px 0;border-top:1px solid var(--hairline)}
-  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
-  .sec-head h2{font-size:clamp(1.5rem,3.5vw,2.1rem)}
-  .rule{flex:1;height:1px;background:var(--hairline)}
+  /* Section scaffolding */
+  section{padding:76px 0;border-top:1px solid var(--hairline)}
+  .sec-head{max-width:640px;margin-bottom:40px}
+  .sec-head h2{font-size:clamp(1.7rem,4vw,2.6rem);margin:12px 0 0}
+  .sec-head p{color:var(--muted);margin:16px 0 0;font-size:1.05rem}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-  .card{background:var(--panel);border:1px solid var(--hairline);border-radius:12px;padding:24px;
-    box-shadow:0 16px 40px rgba(0,0,0,.35)}
-  .card h3{font-size:1.15rem;color:var(--text);margin-bottom:8px}
-  .card p{color:var(--muted);font-size:.95rem;margin:0}
+  /* Privacy manifesto — the dominant band */
+  .manifesto{background:
+      linear-gradient(180deg, rgba(217,185,137,.06), transparent 40%),
+      var(--ground);
+    border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);position:relative}
+  .manifesto::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;opacity:.5;mask-image:radial-gradient(70% 60% at 50% 40%,#000,transparent);pointer-events:none}
+  .manifesto .wrap{position:relative}
+  .manifesto h2{font-size:clamp(2.1rem,6vw,4rem);line-height:1.02;max-width:16ch}
+  .manifesto h2 .accent{color:var(--champagne)}
+  .manifesto .kick{color:var(--muted);font-size:1.12rem;max-width:60ch;margin:22px 0 0}
+  .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:44px}
+  .pillar{background:var(--panel);border:1px solid var(--hairline);border-radius:14px;padding:26px;box-shadow:0 18px 46px rgba(0,0,0,.4)}
+  .pillar .ic{width:40px;height:40px;color:var(--champagne);margin-bottom:16px}
+  .pillar h3{font-size:1.2rem;color:var(--text)}
+  .pillar p{color:var(--muted);font-size:.96rem;margin:8px 0 0}
+  .contrast{margin-top:40px;border-left:3px solid var(--champagne);background:var(--panel-2);border-radius:0 12px 12px 0;padding:24px 26px;max-width:760px}
+  .contrast p{margin:0;color:var(--text);font-size:1.06rem;line-height:1.6}
+  .contrast .q{color:var(--muted)}
+
+  /* Build sheet showcase */
+  .showcase{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+  @media(max-width:860px){.showcase{grid-template-columns:1fr;gap:28px}}
+  .showcase h2{font-size:clamp(1.8rem,4vw,2.8rem)}
+  .showcase p{color:var(--muted);margin:18px 0 0;font-size:1.05rem}
+  .sheetframe{background:#fff;border-radius:10px;padding:0;overflow:hidden;border:1px solid var(--hairline);box-shadow:0 30px 70px rgba(0,0,0,.55)}
+  .featlist{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+  .featlist li{display:flex;gap:10px;color:var(--text);font-size:.98rem}
+  .featlist .dot{color:var(--champagne);font-family:var(--mono)}
+
+  /* Feature grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--hairline);border-radius:14px;padding:26px}
   .card .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;color:var(--champagne);text-transform:uppercase;display:block;margin-bottom:14px}
+  .card h3{font-size:1.16rem;color:var(--text);margin:0 0 8px}
+  .card p{color:var(--muted);font-size:.95rem;margin:0}
 
-  /* Trust strip */
-  .trust{background:var(--panel-2);border:1px solid var(--hairline);border-radius:14px;padding:32px}
-  .trust h2{font-size:1.5rem;margin-bottom:10px}
-  .trust p{color:var(--muted);max-width:60ch;margin:0 0 20px}
-  .points{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-  .point{display:flex;gap:10px;align-items:flex-start;font-size:.92rem}
-  .point .dot{color:var(--champagne);font-family:var(--mono);margin-top:2px}
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+  @media(max-width:800px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--panel);border:1px solid var(--hairline);border-radius:14px;padding:26px;position:relative}
+  .step .n{font-family:var(--mono);font-size:.72rem;color:var(--champagne);letter-spacing:.1em}
+  .step h3{font-size:1.2rem;color:var(--text);margin:10px 0 8px}
+  .step p{color:var(--muted);font-size:.95rem;margin:0}
+
+  /* Pricing */
+  .prices{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px}
+  @media(max-width:700px){.prices{grid-template-columns:1fr}}
+  .price{background:var(--panel);border:1px solid var(--hairline);border-radius:16px;padding:30px}
+  .price.pro{border-color:rgba(217,185,137,.4);background:linear-gradient(180deg,rgba(217,185,137,.07),var(--panel))}
+  .price .name{font-family:var(--cond);text-transform:uppercase;letter-spacing:.06em;font-size:1.15rem}
+  .price .amt{font-family:var(--mono);font-size:2.1rem;font-weight:600;margin:10px 0 2px}
+  .price .amt small{font-size:.9rem;color:var(--muted);font-weight:400}
+  .price ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px}
+  .price li{color:var(--muted);font-size:.94rem;display:flex;gap:9px}
+  .price li .dot{color:var(--champagne);font-family:var(--mono)}
 
   /* FAQ */
-  .faq{display:grid;gap:0}
   details{border-bottom:1px solid var(--hairline);padding:18px 0}
-  summary{cursor:pointer;font-family:var(--cond);text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary{cursor:pointer;font-family:var(--cond);text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";color:var(--champagne);font-family:var(--mono)}
   details[open] summary::after{content:"–"}
-  details p{color:var(--muted);margin:14px 0 0;font-size:.96rem}
+  details p{color:var(--muted);margin:14px 0 0;font-size:.98rem}
 
+  /* Final CTA + footer */
+  .final{text-align:center;background:radial-gradient(90% 120% at 50% 0%,rgba(217,185,137,.1),transparent 60%)}
+  .final h2{font-size:clamp(2rem,5vw,3.2rem)}
+  .final p{color:var(--muted);margin:16px auto 0;max-width:46ch}
   footer{border-top:1px solid var(--hairline);padding:40px 0;color:var(--muted);font-size:.85rem}
   footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
   footer .links{display:flex;gap:20px}
-  .disc{font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;color:#6d6d73;margin-top:26px}
+  .disc{font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;color:var(--faint);margin-top:24px;max-width:760px}
 </style>
+</head>
+<body>
 
-<header>
+<nav>
   <div class="wrap">
     <div class="brand">GLOVEBOX</div>
-    <div class="mono-badge">G</div>
+    <div class="navlinks">
+      <a href="#private">Private by design</a>
+      <a href="#buildsheet">Build sheet</a>
+      <a href="#track">What it tracks</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="badge">G</div>
   </div>
-</header>
+</nav>
 
-<div class="hero">
+<header class="hero">
   <div class="wrap">
     <span class="eyebrow">For the cars you care about</span>
     <h1>Every mile, mod,<br>and receipt — <span class="accent">banked.</span></h1>
     <p class="own">You own your data.<br><span class="accent">We can't even see it.</span>
-      <small>No accounts, no servers, no tracking. Your records live on your device and sync privately through your own iCloud.</small>
+      <small>No account. No servers. No data mining. Your car's history lives on your device and your own private iCloud — nowhere else.</small>
     </p>
-    <p class="lede">The premium native garage companion: maintenance, modifications, documents, drives, and a build spec that becomes a shareable build sheet.</p>
-    <a class="cta" href="#get">Coming to the App Store <small>· iPhone</small></a>
-    <div class="note">iOS · on-device AI · your data stays yours</div>
+    <a class="cta" href="#pricing">Coming to the App Store <small>· iPhone</small></a>
+    <div class="chips">
+      <span class="chip"><b>No</b> account</span>
+      <span class="chip"><b>No</b> servers</span>
+      <span class="chip"><b>No</b> tracking</span>
+      <span class="chip"><b>On-device</b> AI</span>
+    </div>
   </div>
-</div>
+</header>
 
-<section>
+<!-- PRIVACY MANIFESTO -->
+<section class="manifesto" id="private">
   <div class="wrap">
-    <div class="sec-head"><h2>What it does</h2><span class="rule"></span></div>
+    <span class="eyebrow">Private by design</span>
+    <h2>No account. No cloud login. <span class="accent">No data mining. Ever.</span></h2>
+    <p class="kick">Glovebox has no sign-up and no server of its own. There's nothing to hack, nothing to sell, and no company sitting between you and your car's history — because there's no company database at all.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>No account, ever</h3>
+        <p>You never sign up. There's no email, no password, no login — because there's no server to log in to. Open the app and start.</p>
+      </div>
+      <div class="pillar">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15l-2 2M17 15l2 2" stroke-dasharray="2 2"/></svg>
+        <h3>No servers, no mining</h3>
+        <p>Your records never touch a company database. There's nothing to harvest, profile, sell, or leak. Your data isn't the product.</p>
+      </div>
+      <div class="pillar">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 5h3"/><path d="M9 11l2 2 4-4"/></svg>
+        <h3>On-device AI</h3>
+        <p>Scanning a title or receipt runs entirely on your phone with Apple Intelligence. The documents never leave the device.</p>
+      </div>
+    </div>
+
+    <div class="contrast">
+      <p><span class="q">Other apps keep your car's history on their servers so it can be shared, mined, and monetized.</span> Glovebox keeps it on your phone and syncs privately through your own iCloud. We built it so we <b>couldn't look even if we wanted to</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD SHEET -->
+<section id="buildsheet">
+  <div class="wrap showcase">
+    <div>
+      <span class="eyebrow">The Current Build Sheet</span>
+      <h2>Your build, as a factory-style spec sheet.</h2>
+      <p>One tap turns your car's record into a Monroney-style build sheet — original factory specification alongside every modification, priced and totaled. Export it as a PDF to sell the car, insure it, or just admire what you've built.</p>
+      <ul class="featlist">
+        <li><span class="dot">—</span> Standard equipment, modifications, service, and the all-in total</li>
+        <li><span class="dot">—</span> A scannable QR of the build summary and a certified seal</li>
+        <li><span class="dot">—</span> Generated on your phone; yours to share on your terms</li>
+      </ul>
+    </div>
+    <div class="sheetframe"><img src="build-sheet.png" alt="A Glovebox Current Build Sheet — a factory-style spec sheet for a 2013 Porsche 911 Carrera 4S showing standard equipment, modifications, pricing, and totals."></div>
+  </div>
+</section>
+
+<!-- WHAT IT TRACKS -->
+<section id="track">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Everything in one record</span>
+      <h2>The whole car, kept properly.</h2>
+      <p>From a daily driver to a lifelong build — every detail lives in one record you actually control.</p>
+    </div>
     <div class="grid">
-      <div class="card">
-        <span class="tag">Service &amp; Mods</span>
-        <h3>Track the whole build</h3>
-        <p>Log service and modifications with parts and labor kept separate, dated, and totaled — the real cost of the car, at a glance.</p>
-      </div>
-      <div class="card">
-        <span class="tag">AI Extraction</span>
-        <h3>Snap a receipt</h3>
-        <p>Point the camera at a receipt, title, or window sticker. On-device AI reads the line items and fills the fields for you to confirm.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Build Sheet</span>
-        <h3>A current build sheet</h3>
-        <p>Generate a factory-style build sheet of your current build — original spec plus every modification, priced — as a shareable PDF.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Documents</span>
-        <h3>The whole glovebox</h3>
-        <p>Titles, insurance, appraisals, PPIs, and history reports — scanned, filed, and searchable, right where you need them.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Timeline &amp; Comps</span>
-        <h3>See the story</h3>
-        <p>A chronological feed of everything you've done, plus comparable sales to know where your car stands in the market.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Handoff</span>
-        <h3>Sell with the receipts</h3>
-        <p>Export the complete record — encrypted — to hand the next owner a car with nothing left unexplained.</p>
-      </div>
+      <div class="card"><span class="tag">Service &amp; Mods</span><h3>The real, all-in cost</h3><p>Log service and modifications with parts and labor kept separate, dated, and totaled — the true cost of the car, at a glance.</p></div>
+      <div class="card"><span class="tag">Documents</span><h3>The whole glovebox</h3><p>Titles, insurance, appraisals, PPIs, and history reports — scanned with on-device AI and filed where you'll find them.</p></div>
+      <div class="card"><span class="tag">Value</span><h3>Know what it's worth</h3><p>Record appraisals and dealer offers, see a market range from your comps, and generate a clearly-labeled on-device estimate.</p></div>
+      <div class="card"><span class="tag">Timeline &amp; Drives</span><h3>The story, in order</h3><p>A running feed of everything you've done, plus the drives worth remembering — the character behind the record.</p></div>
+      <div class="card"><span class="tag">Comps</span><h3>Market context</h3><p>Keep real comparable sales next to your car so you always know where it stands.</p></div>
+      <div class="card"><span class="tag">Encrypted backup</span><h3>You hold the keys</h3><p>Export a complete, password-encrypted copy to any cloud you choose — unreadable to the provider, and to us.</p></div>
     </div>
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section>
   <div class="wrap">
-    <div class="trust">
-      <span class="eyebrow">Your data</span>
-      <h2>You hold the keys</h2>
-      <p>Glovebox has no accounts and no servers of its own. Your records live on your device and sync privately through your own iCloud — we never see them.</p>
-      <div class="points">
-        <div class="point"><span class="dot">01</span><span>No tracking, no analytics, no ads.</span></div>
-        <div class="point"><span class="dot">02</span><span>Nothing sold or shared with anyone.</span></div>
-        <div class="point"><span class="dot">03</span><span>Encrypted backups you store in your own cloud.</span></div>
+    <div class="sec-head">
+      <span class="eyebrow">Set up in minutes</span>
+      <h2>How it works.</h2>
+      <p>AI to speed it up, or by hand — your call at every step. Nothing is added without your say.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">STEP 01</div><h3>Add your car</h3><p>Scan a title or window sticker and let on-device AI fill in the year, make, model, and VIN — or type it yourself.</p></div>
+      <div class="step"><div class="n">STEP 02</div><h3>Bring in your records</h3><p>Scan receipts and documents; the AI reads the line items and drafts the entries for you to confirm. Nothing leaves your phone.</p></div>
+      <div class="step"><div class="n">STEP 03</div><h3>Keep it current</h3><p>Log services, mods, and drives as they happen. The record grows with the car — and generates a build sheet whenever you want one.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Simple pricing</span>
+      <h2>Free to keep your car. Pro to go further.</h2>
+      <p>One price, once — no subscription, no account, nothing to cancel.</p>
+    </div>
+    <div class="prices">
+      <div class="price">
+        <div class="name">Free</div>
+        <div class="amt">$0</div>
+        <ul>
+          <li><span class="dot">✓</span> Unlimited cars, fully documented</li>
+          <li><span class="dot">✓</span> Service, mods, documents, drives, comps, value</li>
+          <li><span class="dot">✓</span> Encrypted backup to your own cloud</li>
+          <li><span class="dot">✓</span> Private on-device storage &amp; iCloud sync</li>
+        </ul>
+      </div>
+      <div class="price pro">
+        <div class="name">Glovebox Pro</div>
+        <div class="amt">$39.99 <small>one-time</small></div>
+        <ul>
+          <li><span class="dot">✦</span> AI document extraction (receipts, titles, stickers)</li>
+          <li><span class="dot">✦</span> Current Build Sheet export (PDF)</li>
+          <li><span class="dot">✦</span> On-device value estimate</li>
+          <li><span class="dot">✦</span> Everything, forever — no subscription</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section id="get">
+<!-- FAQ -->
+<section id="faq">
   <div class="wrap">
-    <div class="sec-head"><h2>Support &amp; FAQ</h2><span class="rule"></span></div>
-    <div class="faq">
-      <details open><summary>How much does Glovebox cost?</summary>
-        <p>Glovebox is free to download and use for tracking your cars. A one-time Glovebox Pro unlock adds AI document extraction and build sheet export — no subscription.</p></details>
-      <details><summary>Where is my data stored?</summary>
-        <p>On your device, and synced through your personal iCloud account. There is no Glovebox server and no account to create. You can also export an encrypted backup to any cloud you choose.</p></details>
-      <details><summary>Does the AI send my documents anywhere?</summary>
-        <p>No. Document reading runs entirely on-device using Apple's on-device models. Your receipts and titles never leave your phone.</p></details>
-      <details><summary>What do I need to run it?</summary>
-        <p>An iPhone on a recent version of iOS. AI extraction uses Apple Intelligence and requires a supported device; everything else works everywhere.</p></details>
-      <details><summary>I need help or have a suggestion.</summary>
-        <p>Email <a href="mailto:support@gloveboxcars.com">support@gloveboxcars.com</a> and we'll get back to you.</p></details>
-    </div>
+    <div class="sec-head"><span class="eyebrow">Questions</span><h2>Before you download.</h2></div>
+    <details open><summary>Do I need an account?</summary><p>No. Glovebox has no sign-up and no login — there's no server to log in to. Your records live on your device and sync privately through your own iCloud.</p></details>
+    <details><summary>Can you see my data?</summary><p>No. There is no Glovebox server holding your information. Your data stays on your device and in your personal iCloud, under your Apple account. We have no access to it and no way to mine it.</p></details>
+    <details><summary>Does the AI send my documents anywhere?</summary><p>No. Document reading runs entirely on-device with Apple Intelligence. Your receipts, titles, and stickers never leave your phone.</p></details>
+    <details><summary>How much does it cost?</summary><p>Free to download and use for tracking your cars. A one-time Glovebox Pro unlock adds AI document extraction, build sheet export, and the on-device value estimate — no subscription.</p></details>
+    <details><summary>What do I need to run it?</summary><p>An iPhone on a recent version of iOS. The AI features use Apple Intelligence and need a supported device; everything else works everywhere.</p></details>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <span class="eyebrow">Your car, your record</span>
+    <h2>Keep the whole story.<br>Keep it to yourself.</h2>
+    <p>Free to download. No account, no servers, no one looking over your shoulder.</p>
+    <a class="cta" href="#" style="margin-top:28px">Coming to the App Store <small>· iPhone</small></a>
   </div>
 </section>
 
@@ -175,8 +307,11 @@
     <div>© 2026 Glovebox</div>
     <div class="links">
       <a href="mailto:support@gloveboxcars.com">Support</a>
-      <a href="https://claude.ai/code/artifact/91f870cd-072a-43dc-9d42-169c05c5a806">Privacy</a>
+      <a href="./privacy.html">Privacy</a>
     </div>
   </div>
   <div class="wrap"><p class="disc">Not affiliated with any vehicle manufacturer. Build sheets generated by Glovebox are owner records, not factory documents.</p></div>
 </footer>
+
+</body>
+</html>
