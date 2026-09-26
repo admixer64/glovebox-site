@@ -49,12 +49,14 @@
   .hero{position:relative;padding:104px 0 76px;overflow:hidden}
   .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(130% 90% at 50% -20%, rgba(217,185,137,.16), transparent 62%);pointer-events:none}
   .hero .wrap{position:relative}
-  .binder-tag{display:block;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.02em;line-height:1;color:var(--champagne);font-size:clamp(1.6rem,4vw,2.6rem)}
-  .hero h1{font-size:clamp(2.1rem,5.6vw,4.2rem);line-height:1.0;margin:14px 0 0}
-  .hero h1 .line1{white-space:nowrap}
-  @media(max-width:600px){.hero h1 .line1{white-space:normal}}
+  .binder-tag{display:block;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.02em;line-height:1;color:var(--champagne);font-size:clamp(1.4rem,3.4vw,2.1rem)}
+  .hero h1{font-size:clamp(2.1rem,5.4vw,3.9rem);line-height:1.02;margin:14px 0 0}
   .hero h1 .accent{color:var(--champagne)}
-  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:32px;background:var(--champagne);color:var(--ink);font-weight:600;padding:14px 24px;border-radius:10px;font-size:1rem}
+  .hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:48px;align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+  .hero-sub{color:var(--muted);font-size:1.1rem;margin:22px 0 0;max-width:52ch;line-height:1.6}
+  .hero-sheet img{width:100%;border-radius:10px;border:1px solid var(--hairline);box-shadow:0 34px 80px rgba(0,0,0,.6)}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;background:var(--champagne);color:var(--ink);font-weight:600;padding:14px 24px;border-radius:10px;font-size:1rem}
   .cta small{font-weight:500;opacity:.7}
 
   /* Section scaffolding */
@@ -162,10 +164,16 @@
 </nav>
 
 <header class="hero">
-  <div class="wrap">
-    <span class="binder-tag">Ditch the binder.</span>
-    <h1><span class="line1">Every mile, mod, and receipt —</span><br><span class="accent">banked.</span></h1>
-    <a class="cta" href="#pricing">Coming to the App Store <small>· iPhone</small></a>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="binder-tag">Ditch the binder.</span>
+      <h1>The <span class="accent">permanent record</span> of your car.</h1>
+      <p class="hero-sub">Service history, modifications, receipts, documents, ownership, provenance — everything your car has been, and everything it's become, in one record you actually own.</p>
+      <a class="cta" href="#pricing">Coming to the App Store <small>· iPhone</small></a>
+    </div>
+    <div class="hero-sheet">
+      <img src="build-sheet.png" alt="A Glovebox build sheet — a factory-style spec sheet for a 2013 Porsche 911 Carrera 4S showing standard equipment, modifications, pricing, and totals.">
+    </div>
   </div>
 </header>
 
