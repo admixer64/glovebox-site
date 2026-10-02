@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Glovebox — the private garage record</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="A premium car record that's truly yours. No account, no servers, no data mining — your history stays on your device and your private iCloud. We can't even see it.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
@@ -38,7 +40,8 @@
   /* Nav */
   nav{position:sticky;top:0;z-index:50;background:rgba(11,11,13,.82);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--hairline)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .brand{font-family:var(--cond);font-weight:700;letter-spacing:.28em;font-size:1rem;cursor:pointer;transition:opacity .2s}
+  .brand{display:flex;align-items:center;cursor:pointer;transition:opacity .2s}
+  .brand img{height:38px;width:auto;display:block}
   .brand:hover{opacity:.7}
   .navlinks{display:flex;gap:28px;font-size:.82rem;color:var(--muted)}
   .navlinks a{color:var(--muted)}
@@ -161,7 +164,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">GLOVEBOX</div>
+    <a class="brand" href="#" aria-label="Glovebox — back to top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.svg" alt="Glovebox"></a>
     <div class="navlinks">
       <a href="#private">Private by design</a>
       <a href="#yours">Not a feed</a>
@@ -170,7 +173,6 @@
       <a href="#transfer">When you sell</a>
       <a href="#pricing">Pricing</a>
     </div>
-    <div class="badge">G</div>
   </div>
 </nav>
 
