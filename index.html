@@ -38,7 +38,8 @@
   /* Nav */
   nav{position:sticky;top:0;z-index:50;background:rgba(11,11,13,.82);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--hairline)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .brand{font-family:var(--cond);font-weight:700;letter-spacing:.28em;font-size:1rem}
+  .brand{font-family:var(--cond);font-weight:700;letter-spacing:.28em;font-size:1rem;cursor:pointer;transition:opacity .2s}
+  .brand:hover{opacity:.7}
   .navlinks{display:flex;gap:28px;font-size:.82rem;color:var(--muted)}
   .navlinks a{color:var(--muted)}
   .navlinks a:hover{color:var(--text)}
@@ -160,7 +161,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="brand">GLOVEBOX</div>
+    <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">GLOVEBOX</div>
     <div class="navlinks">
       <a href="#private">Private by design</a>
       <a href="#yours">Not a feed</a>
@@ -231,6 +232,49 @@
       <div class="card"><span class="tag">No profile</span><h3>Nobody's watching</h3><p>No followers, no likes, no "who viewed your car." Your build isn't a post, and it isn't being ranked against anyone else's.</p></div>
       <div class="card"><span class="tag">Share on your terms</span><h3>Only when you choose</h3><p>Want to show the car? Export a build sheet or an encrypted copy and hand it to exactly who you want — a buyer, an insurer, a friend. No platform in the middle.</p></div>
       <div class="card"><span class="tag">Yours to keep</span><h3>It doesn't live on us</h3><p>If a social car app shuts down, your history goes with it. Glovebox lives on your device and your iCloud. Your record stays yours — when the car changes hands, its history can go with it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECEIPT AI EXTRACTION -->
+<section id="receipts">
+  <div class="wrap showcase">
+    <div>
+      <span class="eyebrow">Receipt AI scanning</span>
+      <h2>Receipts turn into records — not paperwork.</h2>
+      <p>Take a photo of any receipt or invoice. Glovebox's on-device AI instantly extracts all the key details—shop name, date, items, prices, and totals—and organizes them into a clean, searchable record. No manual typing. No data sent anywhere. Your receipt, perfectly captured.</p>
+      <ul class="featlist">
+        <li><span class="dot">—</span> One photo becomes a complete, organized entry</li>
+        <li><span class="dot">—</span> All scanning happens on your phone—nothing leaves the device</li>
+        <li><span class="dot">—</span> Batch scan a whole folder of receipts at once</li>
+      </ul>
+    </div>
+    <div style="display: grid; gap: 20px; align-items: center;">
+      <div style="background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px;">
+        <div style="font-size: 12px; color: #d4a574; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 12px;">Before: Messy invoice</div>
+        <div style="background: #f5f5f5; border-radius: 8px; aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; text-align: center; padding: 20px;">
+          Crumpled receipt<br/>Hard to read<br/>Multiple line items<br/>scattered across page
+        </div>
+      </div>
+      <div style="text-align: center; font-size: 20px; color: #d4a574;">→</div>
+      <div style="background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px;">
+        <div style="font-size: 12px; color: #d4a574; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 12px;">After: Extracted in app</div>
+        <div style="background: #1a1a1f; border-radius: 8px; padding: 16px; font-size: 12px; color: #e0e0e0; font-family: system-ui;">
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #d4a574; margin-bottom: 4px; font-weight: 600;">Shop</div>
+            <div style="font-size: 13px; font-weight: 500; color: #fff;">Danny's Speed Shop</div>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #d4a574; margin-bottom: 4px; font-weight: 600;">Date</div>
+            <div style="font-size: 13px; font-weight: 500; color: #fff;">June 21, 2023</div>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #d4a574; margin-bottom: 4px; font-weight: 600;">Total</div>
+            <div style="font-size: 16px; font-weight: 700; color: #d4a574;">$2,767.22</div>
+          </div>
+          <div style="font-size: 11px; color: #999; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(212,165,116,0.2);">8 line items extracted</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
