@@ -63,6 +63,25 @@
   .sheet-caption{color:var(--muted);font-size:.95rem;margin:14px 0 0;line-height:1.5;text-align:center}
   .cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;background:var(--champagne);color:var(--ink);font-weight:600;padding:14px 24px;border-radius:10px;font-size:1rem}
   .cta small{font-weight:500;opacity:.7}
+  .cta-row{display:flex;align-items:center;gap:12px 22px;flex-wrap:wrap;margin-top:30px}
+  .cta-row .cta{margin-top:0}
+  .watchlink{display:inline-flex;align-items:center;gap:9px;color:var(--text);font-weight:500;font-size:.98rem;padding:12px 4px;border-bottom:1px solid transparent}
+  .watchlink:hover{color:var(--champagne)}
+  .watchlink svg{width:18px;height:18px;fill:var(--champagne)}
+
+  /* Watch — the two-minute tour, directly under the hero */
+  #watch .sec-head{max-width:680px;margin-bottom:34px}
+  .videoframe{position:relative;max-width:960px;margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid var(--hairline);box-shadow:0 34px 80px rgba(0,0,0,.6);background:#000}
+  .videoframe video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+  .playbtn{position:absolute;left:0;right:0;top:0;bottom:56px;display:grid;place-items:center;width:100%;border:0;background:rgba(11,11,13,.28);cursor:pointer;transition:opacity .25s,background .25s}
+  .playbtn span{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:var(--champagne);box-shadow:0 12px 40px rgba(0,0,0,.55);transition:transform .2s}
+  .playbtn svg{width:30px;height:30px;fill:var(--ink);margin-left:4px}
+  .playbtn:hover{background:rgba(11,11,13,.14)}
+  .playbtn:hover span{transform:scale(1.06)}
+  .playbtn:focus-visible{outline:2px solid var(--champagne);outline-offset:-4px}
+  .videoframe.playing .playbtn{opacity:0;pointer-events:none}
+  .video-note{text-align:center;color:var(--faint);font-size:.9rem;margin:16px 0 0}
+  @media(max-width:520px){.playbtn span{width:64px;height:64px}.playbtn svg{width:24px;height:24px}}
 
   /* Section scaffolding */
   section{padding:76px 0;border-top:1px solid var(--hairline)}
@@ -166,6 +185,7 @@
   <div class="wrap">
     <a class="brand" href="#" aria-label="Glovebox — back to top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.svg" alt="Glovebox"></a>
     <div class="navlinks">
+      <a href="#watch">Watch</a>
       <a href="#private">Private by design</a>
       <a href="#yours">Not a feed</a>
       <a href="#buildsheet">Build sheet</a>
@@ -182,7 +202,10 @@
       <span class="binder-tag">Ditch the binder.</span>
       <h1>The <span class="accent">permanent record</span> of your car.</h1>
       <p class="hero-sub">Everything your car has been — service, modifications, receipts, documents, mileage, photos — kept in one private record you own. And a Current Build Sheet of everything it's become.</p>
-      <a class="cta" href="#pricing">Coming to the App Store <small>· iPhone</small></a>
+      <div class="cta-row">
+        <a class="cta" href="#pricing">Coming to the App Store <small>· iPhone</small></a>
+        <a class="watchlink" href="#watch"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>Watch the 2-minute tour</a>
+      </div>
     </div>
     <div class="hero-sheet">
       <img class="zoomable" src="build-sheet.png" alt="A Glovebox build sheet — a factory-style spec sheet for a 2013 Porsche 911 Carrera 4S showing standard equipment, modifications, pricing, and totals.">
@@ -190,6 +213,25 @@
     </div>
   </div>
 </header>
+
+<!-- WATCH -->
+<section id="watch">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Watch the tour</span>
+      <h2>Glovebox in two minutes.</h2>
+      <p>From a stack of loose receipts to one private record you own: adding a car, reading a receipt on your phone, the Current Build Sheet, and handing everything to the next owner.</p>
+    </div>
+    <div class="videoframe" id="tourframe">
+      <video id="tour" controls playsinline preload="none" poster="glovebox-explainer-poster.jpg" aria-label="Glovebox explainer video, about two minutes">
+        <source src="glovebox-explainer.mp4" type="video/mp4">
+        Your browser can't play this video. <a href="glovebox-explainer.mp4">Download it here</a>.
+      </video>
+      <button class="playbtn" id="tourplay" type="button" aria-label="Play the Glovebox explainer video"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span></button>
+    </div>
+    <p class="video-note">The AI receipt scan shown here needs an iPhone with Apple Intelligence.</p>
+  </div>
+</section>
 
 <!-- PRIVACY MANIFESTO -->
 <section class="manifesto" id="private">
@@ -453,6 +495,14 @@
     });
     box.addEventListener('click', close);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+
+  (function () {
+    var v = document.getElementById('tour'), frame = document.getElementById('tourframe'), btn = document.getElementById('tourplay');
+    if (!v || !btn) return;
+    btn.addEventListener('click', function () { v.play(); v.focus(); });
+    v.addEventListener('play', function () { frame.classList.add('playing'); });
+    v.addEventListener('ended', function () { frame.classList.remove('playing'); });
   })();
 </script>
 </body>
