@@ -25,17 +25,18 @@
     ".gba-panel[data-open=true]{display:flex}",
     ".gba-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--hairline,rgba(255,255,255,.12));font:600 .95rem var(--cond,Oswald,system-ui,sans-serif);letter-spacing:.08em;text-transform:uppercase}",
     ".gba-close{background:none;border:0;color:var(--muted,#9A9AA1);font-size:1.3rem;line-height:1;cursor:pointer;padding:4px 8px}",
-    ".gba-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}",
+    ".gba-log{flex:1 1 auto;min-height:0;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}",
+    ".gba-log>*{flex-shrink:0}",
     ".gba-msg{max-width:88%;padding:9px 12px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}",
     ".gba-msg a{color:var(--champagne,#D9B989)}",
     ".gba-user{align-self:flex-end;background:var(--champagne,#D9B989);color:var(--ink,#0B0B0D)}",
     ".gba-bot{align-self:flex-start;background:rgba(255,255,255,.07)}",
     ".gba-note{align-self:flex-start;color:var(--muted,#9A9AA1);font-size:.85rem}",
-    ".gba-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 10px}",
+    ".gba-chips{display:flex;flex-wrap:wrap;gap:6px}",
     ".gba-chip{background:none;border:1px solid var(--hairline,rgba(255,255,255,.2));color:var(--text,#ECECEE);border-radius:999px;padding:6px 11px;font:inherit;font-size:.82rem;cursor:pointer}",
     ".gba-chip:hover{border-color:var(--champagne,#D9B989)}",
     ".gba-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--hairline,rgba(255,255,255,.12))}",
-    ".gba-input{flex:1;resize:none;height:42px;max-height:110px;background:rgba(255,255,255,.06);color:inherit;border:1px solid var(--hairline,rgba(255,255,255,.15));border-radius:10px;padding:10px;font:inherit}",
+    ".gba-input{flex:1;resize:none;scrollbar-width:none;height:42px;max-height:110px;background:rgba(255,255,255,.06);color:inherit;border:1px solid var(--hairline,rgba(255,255,255,.15));border-radius:10px;padding:10px;font:inherit}",
     ".gba-send{background:var(--champagne,#D9B989);color:var(--ink,#0B0B0D);border:0;border-radius:10px;padding:0 14px;font:600 .9rem var(--sans,Inter,system-ui,sans-serif);cursor:pointer}",
     ".gba-send[disabled]{opacity:.5;cursor:default}",
     ".gba-fine{padding:0 14px 10px;color:var(--muted,#9A9AA1);font-size:.74rem;line-height:1.4}",
@@ -123,7 +124,6 @@
 
   panel.appendChild(head);
   panel.appendChild(log);
-  panel.appendChild(chips);
   panel.appendChild(form);
   panel.appendChild(fine);
   document.body.appendChild(panel);
@@ -150,6 +150,7 @@
     if (open) {
       if (!log.childNodes.length) {
         add("bot", "Stuck in Glovebox? Tell me what you're trying to do and I'll walk you through it: importing, scanning, the build sheet, Pro, sync and more.");
+        log.appendChild(chips);
         SUGGESTIONS.forEach(function (s) {
           var c = el("button", "gba-chip", s);
           c.type = "button";
