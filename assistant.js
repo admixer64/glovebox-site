@@ -216,4 +216,8 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && panel.getAttribute("data-open") === "true") setOpen(false);
   });
+  // The app's Help button opens the site with ?ask=1 so the chat is already open.
+  try {
+    if (/[?&]ask=1(&|$)/.test(location.search)) setOpen(true);
+  } catch (e) {}
 })();
