@@ -36,7 +36,7 @@
     ".gba-chip{background:none;border:1px solid var(--hairline,rgba(255,255,255,.2));color:var(--text,#ECECEE);border-radius:999px;padding:6px 11px;font:inherit;font-size:.82rem;cursor:pointer}",
     ".gba-chip:hover{border-color:var(--champagne,#D9B989)}",
     ".gba-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--hairline,rgba(255,255,255,.12))}",
-    ".gba-input{flex:1;resize:none;scrollbar-width:none;height:42px;max-height:110px;background:rgba(255,255,255,.06);color:inherit;border:1px solid var(--hairline,rgba(255,255,255,.15));border-radius:10px;padding:10px;font:inherit}",
+    ".gba-input{flex:1;resize:none;scrollbar-width:none;height:42px;max-height:110px;background:rgba(255,255,255,.06);color:inherit;border:1px solid var(--hairline,rgba(255,255,255,.15));border-radius:10px;padding:10px;font:inherit;font-size:16px}",
     ".gba-send{background:var(--champagne,#D9B989);color:var(--ink,#0B0B0D);border:0;border-radius:10px;padding:0 14px;font:600 .9rem var(--sans,Inter,system-ui,sans-serif);cursor:pointer}",
     ".gba-send[disabled]{opacity:.5;cursor:default}",
     ".gba-fine{padding:0 14px 10px;color:var(--muted,#9A9AA1);font-size:.74rem;line-height:1.4}",
@@ -144,7 +144,7 @@
     log.scrollTop = log.scrollHeight;
   }
 
-  function setOpen(open) {
+  function setOpen(open, noFocus) {
     panel.setAttribute("data-open", open ? "true" : "false");
     btn.setAttribute("aria-expanded", open ? "true" : "false");
     if (open) {
@@ -158,7 +158,7 @@
           chips.appendChild(c);
         });
       }
-      input.focus();
+      if (!noFocus) input.focus();
     } else {
       btn.focus();
     }
@@ -218,6 +218,6 @@
   });
   // The app's Help button opens the site with ?ask=1 so the chat is already open.
   try {
-    if (/[?&]ask=1(&|$)/.test(location.search)) setOpen(true);
+    if (/[?&]ask=1(&|$)/.test(location.search)) setOpen(true, true);
   } catch (e) {}
 })();
